@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,22 +20,22 @@ public class MatchServiceImpl implements MatchService {
         this.matchRepository = matchRepository;
     }
 
-    @Override
+    @Override @Transactional
     public Match getMatch(Integer id) {
         return matchRepository.getById(id);
     }
 
-    @Override
+    @Override @Transactional
     public List<Match> getAllMatches() {
         return matchRepository.findAll();
     }
 
-    @Override
+    @Override @Transactional
     public void saveOrUpdateMatch(Match match) {
         matchRepository.save(match);
     }
 
-    @Override
+    @Override @Transactional
     public void deleteMatch(Match match) {
         matchRepository.delete(match);
     }
